@@ -1,16 +1,19 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import { HeaderProps } from '@/types/blocks';
+import { HeaderData } from '@/types/blocks';
 import { Button } from '@/components/ui/button';
 
 interface Props {
-  props: HeaderProps;
+  data: HeaderData;
 }
 
-export const HeaderBlock = ({ props }: Props) => {
-  const { logo, navItems, cta } = props;
+export const HeaderSection = ({ data }: Props) => {
+  const { logo, navbar, actionButton } = data;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const logoItem = logo?.[0];
+  const ctaItem = actionButton?.[0];
 
   return (
     <motion.header
@@ -21,27 +24,34 @@ export const HeaderBlock = ({ props }: Props) => {
     >
       <div className="container mx-auto flex h-16 items-center justify-between px-4 md:h-20">
         {/* Logo */}
-        <a
-          href={logo.href}
-          className="font-display text-2xl font-bold tracking-tight text-foreground transition-colors hover:text-primary"
-        >
-          {logo.text}
+        <a href="/" className="flex items-center gap-2">
+          {logoItem?.url ? (
+            <img
+              src={logoItem.url}
+              alt={logoItem.alt || 'Logo'}
+              className="h-8 w-auto object-contain"
+            />
+          ) : (
+            <span className="font-display text-2xl font-bold tracking-tight text-foreground">
+              Artisan
+            </span>
+          )}
         </a>
 
         {/* Desktop Navigation */}
         <nav className="hidden items-center gap-8 md:flex">
-          {navItems.map((item) => (
+          {navbar?.map((item, index) => (
             <a
-              key={item.label}
+              key={index}
               href={item.href}
               className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
               {item.label}
             </a>
           ))}
-          {cta && (
+          {ctaItem && (
             <Button asChild>
-              <a href={cta.href}>{cta.label}</a>
+              <a href={ctaItem.href}>{ctaItem.label}</a>
             </Button>
           )}
         </nav>
@@ -67,9 +77,9 @@ export const HeaderBlock = ({ props }: Props) => {
             className="border-t border-border bg-background md:hidden"
           >
             <nav className="container mx-auto flex flex-col gap-4 px-4 py-6">
-              {navItems.map((item) => (
+              {navbar?.map((item, index) => (
                 <a
-                  key={item.label}
+                  key={index}
                   href={item.href}
                   onClick={() => setIsMenuOpen(false)}
                   className="text-lg font-medium text-muted-foreground transition-colors hover:text-foreground"
@@ -77,9 +87,9 @@ export const HeaderBlock = ({ props }: Props) => {
                   {item.label}
                 </a>
               ))}
-              {cta && (
+              {ctaItem && (
                 <Button asChild className="mt-2 w-full">
-                  <a href={cta.href}>{cta.label}</a>
+                  <a href={ctaItem.href}>{ctaItem.label}</a>
                 </Button>
               )}
             </nav>

@@ -1,184 +1,101 @@
 {
-  "blocks": [
-    {
-      "type": "header",
-      "props": {
-        "logo": {
-          "text": "Artisan",
-          "href": "/"
-        },
-        "navItems": [
-          { "label": "Home", "href": "/" },
-          { "label": "About", "href": "#about" },
-          { "label": "Services", "href": "#services" },
-          { "label": "Portfolio", "href": "#portfolio" },
-          { "label": "Contact", "href": "#contact" }
-        ],
-        "cta": {
-          "label": "Get Started",
-          "href": "#contact"
+  "_id": "698192a96584f0747e444704",
+  "contentTypeId": "698096b425aa95e4d6d64077",
+  "userId": "6980961225aa95e4d6d64076",
+  "data": {
+    "header": {
+      "logo": [
+        {
+          "url": "/hero-image.jpg",
+          "alt": "Artisan Logo"
         }
-      }
+      ],
+      "navbar": [
+        { "label": "Home", "href": "/" },
+        { "label": "About", "href": "#about" },
+        { "label": "Services", "href": "#services" },
+        { "label": "Portfolio", "href": "#portfolio" },
+        { "label": "Contact", "href": "#contact" }
+      ],
+      "actionButton": [
+        { "label": "Get Started", "href": "#contact" }
+      ]
     },
-    {
-      "type": "hero",
-      "props": {
-        "headline": "Crafting Digital Experiences That Inspire",
-        "subheadline": "We blend creativity with technology to build memorable brands and products that stand the test of time.",
-        "primaryCta": {
-          "label": "Explore Our Work",
-          "href": "#portfolio"
+    "banner": {
+      "headline": [
+        { "text": "Crafting Digital Experiences That Inspire" }
+      ],
+      "subtext": [
+        { "text": "We blend creativity with technology to build memorable brands and products that stand the test of time." }
+      ],
+      "heroMedia": [
+        { "type": "image", "url": "/hero-image.jpg" }
+      ],
+      "primaryCTA": [
+        { "label": "Explore Our Work", "href": "#portfolio" }
+      ],
+      "secondaryCTA": [
+        { "label": "Learn More", "href": "#about" }
+      ]
+    },
+    "mainContent": {
+      "introduction": [
+        { "text": "With over a decade of experience, we've helped startups and enterprises alike transform their visions into reality. Our approach combines user-centered design with cutting-edge technology." }
+      ],
+      "cards": [
+        {
+          "title": "Brand Design",
+          "description": "Create a memorable identity that resonates with your audience and sets you apart from the competition.",
+          "icon": "palette"
         },
-        "secondaryCta": {
-          "label": "Learn More",
-          "href": "#about"
+        {
+          "title": "Web Development",
+          "description": "Build fast, responsive, and scalable web applications using modern technologies and best practices.",
+          "icon": "code"
         },
-        "image": {
-          "src": "/hero-image.jpg",
-          "alt": "Creative workspace"
-        }
-      }
-    },
-    {
-      "type": "section",
-      "props": {
-        "id": "about",
-        "title": "Who We Are",
-        "subtitle": "A passionate team of designers, developers, and strategists dedicated to excellence.",
-        "layout": "text-image",
-        "content": {
-          "text": "With over a decade of experience, we've helped startups and enterprises alike transform their visions into reality. Our approach combines user-centered design with cutting-edge technology.",
-          "image": {
-            "src": "/about-image.jpg",
-            "alt": "Our team at work"
-          }
-        }
-      }
-    },
-    {
-      "type": "section",
-      "props": {
-        "id": "services",
-        "title": "What We Do",
-        "subtitle": "Comprehensive solutions tailored to your needs",
-        "layout": "cards",
-        "children": [
-          {
-            "type": "card",
-            "props": {
-              "icon": "palette",
-              "title": "Brand Design",
-              "description": "Create a memorable identity that resonates with your audience and sets you apart from the competition."
-            }
-          },
-          {
-            "type": "card",
-            "props": {
-              "icon": "code",
-              "title": "Web Development",
-              "description": "Build fast, responsive, and scalable web applications using modern technologies and best practices."
-            }
-          },
-          {
-            "type": "card",
-            "props": {
-              "icon": "smartphone",
-              "title": "Mobile Apps",
-              "description": "Native and cross-platform mobile experiences that delight users and drive engagement."
-            }
-          },
-          {
-            "type": "card",
-            "props": {
-              "icon": "trending-up",
-              "title": "Digital Strategy",
-              "description": "Data-driven strategies to grow your online presence and maximize your digital investments."
-            }
-          }
-        ]
-      }
-    },
-    {
-      "type": "carousel",
-      "props": {
-        "id": "portfolio",
-        "title": "Our Work",
-        "subtitle": "A selection of projects we're proud of",
-        "items": [
-          {
-            "image": "/portfolio-1.jpg",
-            "title": "E-Commerce Platform",
-            "category": "Web Development"
-          },
-          {
-            "image": "/portfolio-2.jpg",
-            "title": "Brand Identity",
-            "category": "Design"
-          },
-          {
-            "image": "/portfolio-3.jpg",
-            "title": "Mobile Banking App",
-            "category": "Mobile"
-          },
-          {
-            "image": "/portfolio-4.jpg",
-            "title": "SaaS Dashboard",
-            "category": "Web Application"
-          }
-        ]
-      }
-    },
-    {
-      "type": "section",
-      "props": {
-        "id": "contact",
-        "title": "Let's Work Together",
-        "subtitle": "Ready to start your next project? Get in touch with us.",
-        "layout": "cta",
-        "cta": {
-          "label": "Contact Us",
-          "href": "mailto:hello@artisan.com"
-        }
-      }
-    },
-    {
-      "type": "footer",
-      "props": {
-        "logo": {
-          "text": "Artisan",
-          "href": "/"
+        {
+          "title": "Mobile Apps",
+          "description": "Native and cross-platform mobile experiences that delight users and drive engagement.",
+          "icon": "smartphone"
         },
-        "columns": [
-          {
-            "title": "Company",
-            "links": [
-              { "label": "About", "href": "#about" },
-              { "label": "Services", "href": "#services" },
-              { "label": "Portfolio", "href": "#portfolio" },
-              { "label": "Contact", "href": "#contact" }
-            ]
-          },
-          {
-            "title": "Services",
-            "links": [
-              { "label": "Brand Design", "href": "#" },
-              { "label": "Web Development", "href": "#" },
-              { "label": "Mobile Apps", "href": "#" },
-              { "label": "Digital Strategy", "href": "#" }
-            ]
-          },
-          {
-            "title": "Connect",
-            "links": [
-              { "label": "Twitter", "href": "#" },
-              { "label": "LinkedIn", "href": "#" },
-              { "label": "Instagram", "href": "#" },
-              { "label": "Dribbble", "href": "#" }
-            ]
-          }
-        ],
-        "copyright": "© 2026 Artisan. All rights reserved."
-      }
+        {
+          "title": "Digital Strategy",
+          "description": "Data-driven strategies to grow your online presence and maximize your digital investments.",
+          "icon": "trending-up"
+        }
+      ],
+      "carousel": [
+        { "image": "/portfolio-1.jpg", "title": "E-Commerce Platform", "category": "Web Development" },
+        { "image": "/portfolio-2.jpg", "title": "Brand Identity", "category": "Design" },
+        { "image": "/portfolio-3.jpg", "title": "Mobile Banking App", "category": "Mobile" },
+        { "image": "/portfolio-4.jpg", "title": "SaaS Dashboard", "category": "Web Application" }
+      ],
+      "highlights": [
+        { "text": "Trusted by 500+ clients worldwide" }
+      ]
+    },
+    "footer": {
+      "links": [
+        { "label": "About", "href": "#about" },
+        { "label": "Services", "href": "#services" },
+        { "label": "Portfolio", "href": "#portfolio" },
+        { "label": "Privacy Policy", "href": "/privacy" },
+        { "label": "Terms of Service", "href": "/terms" }
+      ],
+      "socialIcons": [
+        { "platform": "twitter", "url": "https://twitter.com" },
+        { "platform": "linkedin", "url": "https://linkedin.com" },
+        { "platform": "instagram", "url": "https://instagram.com" },
+        { "platform": "github", "url": "https://github.com" }
+      ],
+      "contactInfo": [
+        { "email": "hello@artisan.com" }
+      ],
+      "copyrights": [
+        { "text": "© 2026 Artisan. All rights reserved." }
+      ]
     }
-  ]
+  },
+  "createdAt": "2026-02-03T06:16:09.820Z",
+  "updatedAt": "2026-02-03T06:16:09.820Z"
 }

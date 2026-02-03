@@ -1,96 +1,119 @@
-export interface LinkItem {
-  label: string;
-  href: string;
-}
+// New backend-driven structure
 
-export interface ImageItem {
-  src: string;
+export interface LogoItem {
+  url: string;
   alt: string;
 }
 
-export interface LogoProps {
-  text: string;
-  href: string;
-}
-
-export interface CtaProps {
+export interface NavItem {
   label: string;
   href: string;
 }
 
-// Header Block
-export interface HeaderProps {
-  logo: LogoProps;
-  navItems: LinkItem[];
-  cta?: CtaProps;
+export interface ActionButton {
+  label: string;
+  href: string;
 }
 
-// Hero Block
-export interface HeroProps {
-  headline: string;
-  subheadline?: string;
-  primaryCta?: CtaProps;
-  secondaryCta?: CtaProps;
-  image?: ImageItem;
+export interface HeaderData {
+  logo: LogoItem[];
+  navbar: NavItem[];
+  actionButton: ActionButton[];
 }
 
-// Card Block
-export interface CardProps {
-  icon?: string;
+export interface HeadlineItem {
+  text: string;
+}
+
+export interface SubtextItem {
+  text: string;
+}
+
+export interface HeroMediaItem {
+  type: string;
+  url: string;
+}
+
+export interface CTAItem {
+  label: string;
+  href: string;
+}
+
+export interface BannerData {
+  headline: HeadlineItem[];
+  subtext: SubtextItem[];
+  heroMedia: HeroMediaItem[];
+  primaryCTA: CTAItem[];
+  secondaryCTA: CTAItem[];
+}
+
+export interface IntroductionItem {
+  text: string;
+}
+
+export interface CardItem {
   title: string;
   description: string;
-  image?: ImageItem;
-  href?: string;
+  icon?: string;
+  image?: string;
 }
 
-// Section Block
-export interface SectionProps {
-  id?: string;
-  title: string;
-  subtitle?: string;
-  layout: 'text-image' | 'cards' | 'cta' | 'grid';
-  content?: {
-    text?: string;
-    image?: ImageItem;
-  };
-  cta?: CtaProps;
-  children?: BlockConfig[];
-}
-
-// Carousel Block
-export interface CarouselItemProps {
+export interface CarouselItem {
   image: string;
-  title: string;
+  title?: string;
   category?: string;
 }
 
-export interface CarouselProps {
-  id?: string;
-  title: string;
-  subtitle?: string;
-  items: CarouselItemProps[];
+export interface HighlightItem {
+  text: string;
 }
 
-// Footer Block
-export interface FooterColumnProps {
-  title: string;
-  links: LinkItem[];
+export interface MainContentData {
+  introduction: IntroductionItem[];
+  cards: CardItem[];
+  carousel: CarouselItem[];
+  highlights: HighlightItem[];
 }
 
-export interface FooterProps {
-  logo: LogoProps;
-  columns: FooterColumnProps[];
-  copyright: string;
+export interface FooterLinkItem {
+  label: string;
+  href: string;
 }
 
-// Block Configuration
-export type BlockType = 'header' | 'hero' | 'section' | 'card' | 'carousel' | 'footer';
-
-export interface BlockConfig {
-  type: BlockType;
-  props: HeaderProps | HeroProps | SectionProps | CardProps | CarouselProps | FooterProps;
+export interface SocialIconItem {
+  platform: string;
+  url: string;
 }
 
-export interface PageConfig {
-  blocks: BlockConfig[];
+export interface ContactInfoItem {
+  email?: string;
+  phone?: string;
+  address?: string;
+}
+
+export interface CopyrightItem {
+  text: string;
+}
+
+export interface FooterData {
+  links: FooterLinkItem[];
+  socialIcons: SocialIconItem[];
+  contactInfo: ContactInfoItem[];
+  copyrights: CopyrightItem[];
+}
+
+export interface PageData {
+  header: HeaderData;
+  banner: BannerData;
+  mainContent: MainContentData;
+  footer: FooterData;
+}
+
+export interface BackendResponse {
+  _id: string;
+  contentTypeId: string;
+  userId: string;
+  data: PageData;
+  createdAt: string;
+  updatedAt: string;
 }
