@@ -1,13 +1,19 @@
 import { motion } from 'framer-motion';
-import { HeroProps } from '@/types/blocks';
+import { BannerData } from '@/types/blocks';
 import { Button } from '@/components/ui/button';
 
 interface Props {
-  props: HeroProps;
+  data: BannerData;
 }
 
-export const HeroBlock = ({ props }: Props) => {
-  const { headline, subheadline, primaryCta, secondaryCta, image } = props;
+export const BannerSection = ({ data }: Props) => {
+  const { headline, subtext, heroMedia, primaryCTA, secondaryCTA } = data;
+
+  const headlineText = headline?.[0]?.text || '';
+  const subtextText = subtext?.[0]?.text || '';
+  const mediaItem = heroMedia?.[0];
+  const primaryCtaItem = primaryCTA?.[0];
+  const secondaryCtaItem = secondaryCTA?.[0];
 
   return (
     <section className="relative min-h-[90vh] overflow-hidden hero-gradient">
@@ -21,7 +27,7 @@ export const HeroBlock = ({ props }: Props) => {
             className="text-center lg:text-left"
           >
             <h1 className="font-display text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
-              {headline.split(' ').map((word, i, arr) => (
+              {headlineText.split(' ').map((word, i, arr) => (
                 <span key={i}>
                   {i === arr.length - 1 ? (
                     <span className="text-gradient">{word}</span>
@@ -31,15 +37,15 @@ export const HeroBlock = ({ props }: Props) => {
                 </span>
               ))}
             </h1>
-            
-            {subheadline && (
+
+            {subtextText && (
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.2 }}
                 className="mt-6 text-lg text-muted-foreground md:text-xl lg:max-w-lg"
               >
-                {subheadline}
+                {subtextText}
               </motion.p>
             )}
 
@@ -49,21 +55,21 @@ export const HeroBlock = ({ props }: Props) => {
               transition={{ duration: 0.7, delay: 0.4 }}
               className="mt-8 flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start"
             >
-              {primaryCta && (
+              {primaryCtaItem && (
                 <Button asChild size="lg" className="text-base">
-                  <a href={primaryCta.href}>{primaryCta.label}</a>
+                  <a href={primaryCtaItem.href}>{primaryCtaItem.label}</a>
                 </Button>
               )}
-              {secondaryCta && (
+              {secondaryCtaItem && (
                 <Button asChild variant="outline" size="lg" className="text-base">
-                  <a href={secondaryCta.href}>{secondaryCta.label}</a>
+                  <a href={secondaryCtaItem.href}>{secondaryCtaItem.label}</a>
                 </Button>
               )}
             </motion.div>
           </motion.div>
 
-          {/* Image */}
-          {image && (
+          {/* Media */}
+          {mediaItem && (
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -71,15 +77,24 @@ export const HeroBlock = ({ props }: Props) => {
               className="relative"
             >
               <div className="relative aspect-[4/3] overflow-hidden rounded-2xl card-shadow">
-                <img
-                  src={image.src}
-                  alt={image.alt}
-                  className="h-full w-full object-cover"
-                />
-                {/* Decorative elements */}
+                {mediaItem.type === 'video' ? (
+                  <video
+                    src={mediaItem.url}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="h-full w-full object-cover"
+                  />
+                ) : (
+                  <img
+                    src={mediaItem.url}
+                    alt="Hero"
+                    className="h-full w-full object-cover"
+                  />
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent" />
               </div>
-              {/* Floating decoration */}
               <div className="absolute -bottom-6 -right-6 -z-10 h-full w-full rounded-2xl bg-primary/10" />
             </motion.div>
           )}
