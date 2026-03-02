@@ -1,20 +1,27 @@
-import { PageData } from '@/types/blocks';
-import { HeaderSection } from './HeaderSection';
-import { BannerSection } from './BannerSection';
-import { MainContentSection } from './MainContentSection';
-import { FooterSection } from './FooterSection';
+import { PageConfig } from '@/types/blocks';
+import { useEffect } from 'react';
+import { DynamicSection } from './DynamicSection';
 
 interface PageRendererProps {
-  data: PageData;
+  config: PageConfig;
 }
 
-export const PageRenderer = ({ data }: PageRendererProps) => {
+export const PageRenderer = ({ config }: PageRendererProps) => {
+  useEffect(() => {
+    if (config.seo) {
+      document.title = config.seo.title || '';
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) metaDesc.setAttribute('content', config.seo.description || '');
+      const metaKeys = document.querySelector('meta[name="keywords"]');
+      if (metaKeys) metaKeys.setAttribute('content', config.seo.keywords || '');
+    }
+  }, [config.seo]);
+
   return (
     <>
-      {data.header && <HeaderSection data={data.header} />}
-      {data.banner && <BannerSection data={data.banner} />}
-      {data.mainContent && <MainContentSection data={data.mainContent} />}
-      {data.footer && <FooterSection data={data.footer} />}
+      {config.sections.map((section, index) => (
+        <DynamicSection key={`${section.type}-${index}`} section={section} />
+      ))}
     </>
   );
 };
