@@ -1,19 +1,24 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import { HeaderData } from '@/types/blocks';
+import { SectionProp } from '@/types/blocks';
+import { getProp } from './DynamicSection';
 import { Button } from '@/components/ui/button';
 
 interface Props {
-  data: HeaderData;
+  props: SectionProp[];
 }
 
-export const HeaderSection = ({ data }: Props) => {
-  const { logo, navbar, actionButton } = data;
+export const HeaderSection = ({ props }: Props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const logoItem = logo?.[0];
-  const ctaItem = actionButton?.[0];
+  const logoProp = getProp(props, 'logo');
+  const navbarProp = getProp(props, 'navbar');
+  const actionProp = getProp(props, 'actionButton');
+
+  const logoItem = logoProp?.children?.[0];
+  const navItems = navbarProp?.children || [];
+  const actionItems = actionProp?.children || [];
 
   return (
     <motion.header
@@ -23,40 +28,29 @@ export const HeaderSection = ({ data }: Props) => {
       className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-lg"
     >
       <div className="container mx-auto flex h-16 items-center justify-between px-4 md:h-20">
-        {/* Logo */}
-        <a href="/" className="flex items-center gap-2">
-          {logoItem?.url ? (
-            <img
-              src={logoItem.url}
-              alt={logoItem.alt || 'Logo'}
-              className="h-8 w-auto object-contain"
-            />
-          ) : (
-            <span className="font-display text-2xl font-bold tracking-tight text-foreground">
-              Artisan
-            </span>
-          )}
-        </a>
+        {logoItem && (
+          <a href="/" className="flex items-center gap-2">
+            {logoItem.href ? (
+              <img src={logoItem.href} alt={logoItem.alt || 'Logo'} className="h-8 w-auto object-contain" />
+            ) : (
+              <span className="font-display text-2xl font-bold tracking-tight text-foreground">Logo</span>
+            )}
+          </a>
+        )}
 
-        {/* Desktop Navigation */}
         <nav className="hidden items-center gap-8 md:flex">
-          {navbar?.map((item, index) => (
-            <a
-              key={index}
-              href={item.href}
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-            >
+          {navItems.map((item, i) => (
+            <a key={i} href={item.href} className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
               {item.label}
             </a>
           ))}
-          {ctaItem && (
-            <Button asChild>
-              <a href={ctaItem.href}>{ctaItem.label}</a>
+          {actionItems.map((item, i) => (
+            <Button key={i} asChild>
+              <a href={item.href}>{item.label}</a>
             </Button>
-          )}
+          ))}
         </nav>
 
-        {/* Mobile Menu Button */}
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           className="flex h-10 w-10 items-center justify-center rounded-lg text-foreground transition-colors hover:bg-muted md:hidden"
@@ -66,7 +60,6 @@ export const HeaderSection = ({ data }: Props) => {
         </button>
       </div>
 
-      {/* Mobile Navigation */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
@@ -77,21 +70,16 @@ export const HeaderSection = ({ data }: Props) => {
             className="border-t border-border bg-background md:hidden"
           >
             <nav className="container mx-auto flex flex-col gap-4 px-4 py-6">
-              {navbar?.map((item, index) => (
-                <a
-                  key={index}
-                  href={item.href}
-                  onClick={() => setIsMenuOpen(false)}
-                  className="text-lg font-medium text-muted-foreground transition-colors hover:text-foreground"
-                >
+              {navItems.map((item, i) => (
+                <a key={i} href={item.href} onClick={() => setIsMenuOpen(false)} className="text-lg font-medium text-muted-foreground transition-colors hover:text-foreground">
                   {item.label}
                 </a>
               ))}
-              {ctaItem && (
-                <Button asChild className="mt-2 w-full">
-                  <a href={ctaItem.href}>{ctaItem.label}</a>
+              {actionItems.map((item, i) => (
+                <Button key={i} asChild className="mt-2 w-full">
+                  <a href={item.href}>{item.label}</a>
                 </Button>
-              )}
+              ))}
             </nav>
           </motion.div>
         )}

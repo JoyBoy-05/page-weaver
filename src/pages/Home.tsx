@@ -1,19 +1,17 @@
 import { PageRenderer } from '@/components/blocks/PageRenderer';
 import pageConfig from '@/config/pageConfig.json';
-import { BackendResponse } from '@/types/blocks';
+import { PageConfig } from '@/types/blocks';
 
 const Home = () => {
-  // Cast the imported JSON to our BackendResponse type
-  const config = pageConfig as BackendResponse;
+  const config = pageConfig as PageConfig;
 
-  // If no data exists in the config, render nothing
-  if (!config.data) {
+  if (!config.sections || config.sections.length === 0) {
     return null;
   }
 
   return (
     <div className="min-h-screen">
-      <PageRenderer data={config.data} />
+      <PageRenderer config={config} />
     </div>
   );
 };

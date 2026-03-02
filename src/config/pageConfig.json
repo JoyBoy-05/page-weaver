@@ -1,101 +1,144 @@
 {
-  "_id": "698192a96584f0747e444704",
-  "contentTypeId": "698096b425aa95e4d6d64077",
-  "userId": "6980961225aa95e4d6d64076",
-  "data": {
-    "header": {
-      "logo": [
+  "page": "Home",
+  "seo": {
+    "title": "Welcome to Our Home Page",
+    "description": "Explore our latest products and services.",
+    "keywords": "home, products, services"
+  },
+  "sections": [
+    {
+      "type": "header",
+      "props": [
         {
-          "url": "/hero-image.jpg",
-          "alt": "Artisan Logo"
+          "id": "logo",
+          "children": [
+            { "href": "/hero-image.jpg" }
+          ]
+        },
+        {
+          "id": "navbar",
+          "children": [
+            { "label": "Home", "href": "#" },
+            { "label": "About", "href": "#about" },
+            { "label": "Services", "href": "#services" },
+            { "label": "Portfolio", "href": "#portfolio" },
+            { "label": "Contact", "href": "#contact" }
+          ]
+        },
+        {
+          "id": "actionButton",
+          "children": [
+            { "label": "Get Started", "href": "#contact" }
+          ]
         }
-      ],
-      "navbar": [
-        { "label": "Home", "href": "/" },
-        { "label": "About", "href": "#about" },
-        { "label": "Services", "href": "#services" },
-        { "label": "Portfolio", "href": "#portfolio" },
-        { "label": "Contact", "href": "#contact" }
-      ],
-      "actionButton": [
-        { "label": "Get Started", "href": "#contact" }
       ]
     },
-    "banner": {
-      "headline": [
-        { "text": "Crafting Digital Experiences That Inspire" }
-      ],
-      "subtext": [
-        { "text": "We blend creativity with technology to build memorable brands and products that stand the test of time." }
-      ],
-      "heroMedia": [
-        { "type": "image", "url": "/hero-image.jpg" }
-      ],
-      "primaryCTA": [
-        { "label": "Explore Our Work", "href": "#portfolio" }
-      ],
-      "secondaryCTA": [
-        { "label": "Learn More", "href": "#about" }
-      ]
-    },
-    "mainContent": {
-      "introduction": [
-        { "text": "With over a decade of experience, we've helped startups and enterprises alike transform their visions into reality. Our approach combines user-centered design with cutting-edge technology." }
-      ],
-      "cards": [
+    {
+      "type": "banner",
+      "props": [
         {
-          "title": "Brand Design",
-          "description": "Create a memorable identity that resonates with your audience and sets you apart from the competition.",
-          "icon": "palette"
+          "id": "heading",
+          "children": [
+            { "tag": "h1", "text": "Crafting Digital Experiences That Inspire" }
+          ]
         },
         {
-          "title": "Web Development",
-          "description": "Build fast, responsive, and scalable web applications using modern technologies and best practices.",
-          "icon": "code"
+          "id": "subHeading",
+          "children": [
+            { "tag": "p", "text": "We blend creativity with technology to build memorable brands and products that stand the test of time." }
+          ]
         },
         {
-          "title": "Mobile Apps",
-          "description": "Native and cross-platform mobile experiences that delight users and drive engagement.",
-          "icon": "smartphone"
+          "id": "heroMedia",
+          "children": [
+            { "href": "/hero-image.jpg" }
+          ]
         },
         {
-          "title": "Digital Strategy",
-          "description": "Data-driven strategies to grow your online presence and maximize your digital investments.",
-          "icon": "trending-up"
+          "id": "cta",
+          "children": [
+            { "label": "Explore Our Work", "href": "#portfolio" },
+            { "label": "Learn More", "href": "#about" }
+          ]
         }
-      ],
-      "carousel": [
-        { "image": "/portfolio-1.jpg", "title": "E-Commerce Platform", "category": "Web Development" },
-        { "image": "/portfolio-2.jpg", "title": "Brand Identity", "category": "Design" },
-        { "image": "/portfolio-3.jpg", "title": "Mobile Banking App", "category": "Mobile" },
-        { "image": "/portfolio-4.jpg", "title": "SaaS Dashboard", "category": "Web Application" }
-      ],
-      "highlights": [
-        { "text": "Trusted by 500+ clients worldwide" }
       ]
     },
-    "footer": {
-      "links": [
-        { "label": "About", "href": "#about" },
-        { "label": "Services", "href": "#services" },
-        { "label": "Portfolio", "href": "#portfolio" },
-        { "label": "Privacy Policy", "href": "/privacy" },
-        { "label": "Terms of Service", "href": "/terms" }
-      ],
-      "socialIcons": [
-        { "platform": "twitter", "url": "https://twitter.com" },
-        { "platform": "linkedin", "url": "https://linkedin.com" },
-        { "platform": "instagram", "url": "https://instagram.com" },
-        { "platform": "github", "url": "https://github.com" }
-      ],
-      "contactInfo": [
-        { "email": "hello@artisan.com" }
-      ],
-      "copyrights": [
-        { "text": "© 2026 Artisan. All rights reserved." }
+    {
+      "type": "mainContent",
+      "props": [
+        {
+          "id": "Heading",
+          "children": [
+            { "tag": "h2", "text": "Who We Are" }
+          ]
+        },
+        {
+          "id": "introduction",
+          "children": [
+            { "tag": "p", "text": "With over a decade of experience, we've helped startups and enterprises alike transform their visions into reality." }
+          ]
+        },
+        {
+          "id": "cards",
+          "children": [
+            { "title": "Brand Design", "description": "Create a memorable identity that resonates with your audience.", "icon": "palette" },
+            { "title": "Web Development", "description": "Build fast, responsive, and scalable web applications.", "icon": "code" },
+            { "title": "Mobile Apps", "description": "Native and cross-platform mobile experiences.", "icon": "smartphone" },
+            { "title": "Digital Strategy", "description": "Data-driven strategies to grow your online presence.", "icon": "trending-up" }
+          ]
+        },
+        {
+          "id": "carousel",
+          "children": [
+            { "href": "/portfolio-1.jpg", "title": "E-Commerce Platform", "category": "Web Development" },
+            { "href": "/portfolio-2.jpg", "title": "Brand Identity", "category": "Design" },
+            { "href": "/portfolio-3.jpg", "title": "Mobile Banking App", "category": "Mobile" },
+            { "href": "/portfolio-4.jpg", "title": "SaaS Dashboard", "category": "Web Application" }
+          ]
+        },
+        {
+          "id": "highlights",
+          "children": [
+            { "text": "Trusted by 500+ clients worldwide" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "footer",
+      "props": [
+        {
+          "id": "links",
+          "children": [
+            { "label": "About", "href": "#about" },
+            { "label": "Services", "href": "#services" },
+            { "label": "Portfolio", "href": "#portfolio" },
+            { "label": "Privacy Policy", "href": "/privacy" },
+            { "label": "Terms of Service", "href": "/terms" }
+          ]
+        },
+        {
+          "id": "socialIcons",
+          "children": [
+            { "platform": "twitter", "url": "https://twitter.com" },
+            { "platform": "linkedin", "url": "https://linkedin.com" },
+            { "platform": "instagram", "url": "https://instagram.com" },
+            { "platform": "github", "url": "https://github.com" }
+          ]
+        },
+        {
+          "id": "contactInfo",
+          "children": [
+            { "email": "hello@artisan.com" }
+          ]
+        },
+        {
+          "id": "copyrights",
+          "children": [
+            { "text": "© 2026 Artisan. All rights reserved." }
+          ]
+        }
       ]
     }
-  },
-  "createdAt": "2026-02-03T06:16:09.820Z",
-  "updatedAt": "2026-02-03T06:16:09.820Z"
+  ]
 }
