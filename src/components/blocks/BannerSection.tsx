@@ -23,7 +23,7 @@ export const BannerSection = ({ props }: Props) => {
   const mediaItem = mediaItems[0];
 
   const handleClick = (e: React.MouseEvent, label: string, href: string) => {
-    if (href.startsWith('#')) return;
+    if (href.startsWith('http') || href.startsWith('mailto:')) return;
     e.preventDefault();
     navigateTo(label);
   };

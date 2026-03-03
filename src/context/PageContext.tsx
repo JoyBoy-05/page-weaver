@@ -26,8 +26,7 @@ export const PageProvider = ({ children }: PageProviderProps) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const navigateTo = useCallback(async (pageName: string) => {
-    // Skip hash links and external URLs
-    if (!pageName || pageName === '#' || pageName.startsWith('#') || pageName.startsWith('http')) return;
+    if (!pageName) return;
 
     setIsLoading(true);
     try {

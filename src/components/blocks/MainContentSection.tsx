@@ -26,7 +26,7 @@ const RenderProp = ({ prop }: { prop: SectionProp }) => {
   const { navigateTo } = usePageContext();
 
   const handleClick = (e: React.MouseEvent, label: string, href: string) => {
-    if (href.startsWith('#')) return;
+    if (href.startsWith('http') || href.startsWith('mailto:')) return;
     e.preventDefault();
     navigateTo(label);
   };
