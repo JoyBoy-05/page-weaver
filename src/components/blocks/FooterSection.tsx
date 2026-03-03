@@ -27,7 +27,7 @@ export const FooterSection = ({ props }: Props) => {
   const copyrightText = copyrightProp?.children?.[0]?.text || '';
 
   const handleClick = (e: React.MouseEvent, label: string, href: string) => {
-    if (href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto:')) return;
+    if (href.startsWith('http') || href.startsWith('mailto:')) return;
     e.preventDefault();
     navigateTo(label);
   };

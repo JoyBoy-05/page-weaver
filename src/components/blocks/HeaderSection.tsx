@@ -23,8 +23,7 @@ export const HeaderSection = ({ props }: Props) => {
   const actionItems = actionProp?.children || [];
 
   const handleClick = (e: React.MouseEvent, label: string, href: string) => {
-    // Allow hash links to scroll normally
-    if (href.startsWith('#')) return;
+    if (href.startsWith('http') || href.startsWith('mailto:')) return;
     e.preventDefault();
     navigateTo(label);
   };
