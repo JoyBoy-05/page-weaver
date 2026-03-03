@@ -2,12 +2,15 @@ import { motion } from 'framer-motion';
 import { SectionProp } from '@/types/blocks';
 import { getProp } from './DynamicSection';
 import { Button } from '@/components/ui/button';
+import { usePageContext } from '@/context/PageContext';
 
 interface Props {
   props: SectionProp[];
 }
 
 export const BannerSection = ({ props }: Props) => {
+  const { navigateTo } = usePageContext();
+
   const headingProp = getProp(props, 'heading');
   const subHeadingProp = getProp(props, 'subHeading');
   const heroMediaProp = getProp(props, 'heroMedia');
@@ -18,6 +21,12 @@ export const BannerSection = ({ props }: Props) => {
   const mediaItems = heroMediaProp?.children || [];
   const ctaItems = ctaProp?.children || [];
   const mediaItem = mediaItems[0];
+
+  const handleClick = (e: React.MouseEvent, label: string, href: string) => {
+    if (href.startsWith('#')) return;
+    e.preventDefault();
+    navigateTo(label);
+  };
 
   return (
     <section className="relative min-h-[90vh] overflow-hidden hero-gradient">
@@ -55,7 +64,7 @@ export const BannerSection = ({ props }: Props) => {
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.4 }} className="mt-8 flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start">
                 {ctaItems.map((cta, i) => (
                   <Button key={i} asChild size="lg" variant={i === 0 ? 'default' : 'outline'} className="text-base">
-                    <a href={cta.href}>{cta.label}</a>
+                    <a href={cta.href} onClick={(e) => handleClick(e, cta.label, cta.href)}>{cta.label}</a>
                   </Button>
                 ))}
               </motion.div>

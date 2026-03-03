@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion';
 import { Palette, Code, Smartphone, TrendingUp, Star, Zap, Shield, Globe } from 'lucide-react';
 import { SectionProp } from '@/types/blocks';
-import { getAllProps, getProp } from './DynamicSection';
+import { getProp } from './DynamicSection';
+import { usePageContext } from '@/context/PageContext';
 import {
   Carousel,
   CarouselContent,
@@ -22,6 +23,13 @@ interface Props {
 /** Renders each prop dynamically based on its id */
 const RenderProp = ({ prop }: { prop: SectionProp }) => {
   const { id, children } = prop;
+  const { navigateTo } = usePageContext();
+
+  const handleClick = (e: React.MouseEvent, label: string, href: string) => {
+    if (href.startsWith('#')) return;
+    e.preventDefault();
+    navigateTo(label);
+  };
 
   // Heading / SubHeading / Introduction — render text with tag
   if (['Heading', 'subHeading', 'introduction'].includes(id)) {
@@ -120,14 +128,22 @@ const RenderProp = ({ prop }: { prop: SectionProp }) => {
     );
   }
 
-  // Generic fallback — render text children
+  // Generic fallback — render text children with navigation support
   return (
     <section className="py-12">
       <div className="container mx-auto px-4">
         {children.map((child, i) => (
           <div key={i} className="text-muted-foreground">
             {child.text && <p>{child.text}</p>}
-            {child.label && <a href={child.href} className="text-primary hover:underline">{child.label}</a>}
+            {child.label && (
+              <a
+                href={child.href}
+                onClick={(e) => handleClick(e, child.label, child.href)}
+                className="text-primary hover:underline cursor-pointer"
+              >
+                {child.label}
+              </a>
+            )}
           </div>
         ))}
       </div>
