@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useCallback, ReactNode } from 'react';
+import axios from 'axios';
 import { PageConfig } from '@/types/blocks';
 import initialConfig from '@/config/pageConfig.json';
 
@@ -31,10 +32,7 @@ export const PageProvider = ({ children }: PageProviderProps) => {
     setIsLoading(true);
     try {
       // TODO: Replace this URL with your actual backend endpoint
-      // It will fetch JSON for the page matching the given name
-      const response = await fetch(`/api/pages/${encodeURIComponent(pageName.toLowerCase())}`);
-      if (!response.ok) throw new Error(`Failed to fetch page: ${pageName}`);
-      const data = await response.json();
+      const { data } = await axios.get(`/api/pages/${encodeURIComponent(pageName.toLowerCase())}`);
 
       // Support both wrapped { data: { sections, seo, ... } } and flat format
       const pageData: PageConfig = data.data || data;
