@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Twitter, Linkedin, Instagram, Github, Facebook, Youtube } from 'lucide-react';
 import { SectionProp } from '@/types/blocks';
 import { getProp } from './DynamicSection';
+import { usePageContext } from '@/context/PageContext';
 
 const socialIconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   twitter: Twitter, linkedin: Linkedin, instagram: Instagram,
@@ -13,6 +14,8 @@ interface Props {
 }
 
 export const FooterSection = ({ props }: Props) => {
+  const { navigateTo } = usePageContext();
+
   const linksProp = getProp(props, 'links');
   const socialProp = getProp(props, 'socialIcons');
   const contactProp = getProp(props, 'contactInfo');
@@ -22,6 +25,12 @@ export const FooterSection = ({ props }: Props) => {
   const socialIcons = socialProp?.children || [];
   const contactEmail = contactProp?.children?.[0]?.email || '';
   const copyrightText = copyrightProp?.children?.[0]?.text || '';
+
+  const handleClick = (e: React.MouseEvent, label: string, href: string) => {
+    if (href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto:')) return;
+    e.preventDefault();
+    navigateTo(label);
+  };
 
   return (
     <motion.footer initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="border-t border-border bg-card">
@@ -40,7 +49,15 @@ export const FooterSection = ({ props }: Props) => {
               <h4 className="font-semibold text-foreground">Quick Links</h4>
               <ul className="mt-4 grid grid-cols-2 gap-3">
                 {links.map((link, i) => (
-                  <li key={i}><a href={link.href} className="text-muted-foreground transition-colors hover:text-foreground">{link.label}</a></li>
+                  <li key={i}>
+                    <a
+                      href={link.href}
+                      onClick={(e) => handleClick(e, link.label, link.href)}
+                      className="text-muted-foreground transition-colors hover:text-foreground cursor-pointer"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
                 ))}
               </ul>
             </div>

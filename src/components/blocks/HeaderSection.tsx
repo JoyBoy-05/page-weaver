@@ -4,6 +4,7 @@ import { Menu, X } from 'lucide-react';
 import { SectionProp } from '@/types/blocks';
 import { getProp } from './DynamicSection';
 import { Button } from '@/components/ui/button';
+import { usePageContext } from '@/context/PageContext';
 
 interface Props {
   props: SectionProp[];
@@ -11,6 +12,7 @@ interface Props {
 
 export const HeaderSection = ({ props }: Props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { navigateTo } = usePageContext();
 
   const logoProp = getProp(props, 'logo');
   const navbarProp = getProp(props, 'navbar');
@@ -19,6 +21,13 @@ export const HeaderSection = ({ props }: Props) => {
   const logoItem = logoProp?.children?.[0];
   const navItems = navbarProp?.children || [];
   const actionItems = actionProp?.children || [];
+
+  const handleClick = (e: React.MouseEvent, label: string, href: string) => {
+    // Allow hash links to scroll normally
+    if (href.startsWith('#')) return;
+    e.preventDefault();
+    navigateTo(label);
+  };
 
   return (
     <motion.header
@@ -29,7 +38,7 @@ export const HeaderSection = ({ props }: Props) => {
     >
       <div className="container mx-auto flex h-16 items-center justify-between px-4 md:h-20">
         {logoItem && (
-          <a href="/" className="flex items-center gap-2">
+          <a href="/" className="flex items-center gap-2" onClick={(e) => handleClick(e, 'Home', '/')}>
             {logoItem.href ? (
               <img src={logoItem.href} alt={logoItem.alt || 'Logo'} className="h-8 w-auto object-contain" />
             ) : (
@@ -40,13 +49,18 @@ export const HeaderSection = ({ props }: Props) => {
 
         <nav className="hidden items-center gap-8 md:flex">
           {navItems.map((item, i) => (
-            <a key={i} href={item.href} className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
+            <a
+              key={i}
+              href={item.href}
+              onClick={(e) => handleClick(e, item.label, item.href)}
+              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground cursor-pointer"
+            >
               {item.label}
             </a>
           ))}
           {actionItems.map((item, i) => (
             <Button key={i} asChild>
-              <a href={item.href}>{item.label}</a>
+              <a href={item.href} onClick={(e) => handleClick(e, item.label, item.href)}>{item.label}</a>
             </Button>
           ))}
         </nav>
@@ -71,13 +85,18 @@ export const HeaderSection = ({ props }: Props) => {
           >
             <nav className="container mx-auto flex flex-col gap-4 px-4 py-6">
               {navItems.map((item, i) => (
-                <a key={i} href={item.href} onClick={() => setIsMenuOpen(false)} className="text-lg font-medium text-muted-foreground transition-colors hover:text-foreground">
+                <a
+                  key={i}
+                  href={item.href}
+                  onClick={(e) => { handleClick(e, item.label, item.href); setIsMenuOpen(false); }}
+                  className="text-lg font-medium text-muted-foreground transition-colors hover:text-foreground cursor-pointer"
+                >
                   {item.label}
                 </a>
               ))}
               {actionItems.map((item, i) => (
                 <Button key={i} asChild className="mt-2 w-full">
-                  <a href={item.href}>{item.label}</a>
+                  <a href={item.href} onClick={(e) => handleClick(e, item.label, item.href)}>{item.label}</a>
                 </Button>
               ))}
             </nav>
